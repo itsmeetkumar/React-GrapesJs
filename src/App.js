@@ -1,23 +1,38 @@
-import logo from './logo.svg';
+import React, {useState, useEffect } from "react";
+import grapesjs from "grapesjs";
 import './App.css';
+import gjsPresetWebpage from "grapesjs-preset-webpage";
 
 function App() {
+  const [editor, setEditor] = useState(null);
+
+  useEffect(()=>{
+    const editor= grapesjs.init({
+      container: "#editor",
+      plugins: [gjsPresetWebpage],
+      pluginsOpts:{
+
+        gjsPresetWebpage:{},
+
+    }
+    });
+    setEditor(editor);
+  }, []);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div style={{backgroundColor:"lightblue", width:"100%", height:"30px"}}>
+        <form>
+          <select>
+            <option>Option 1</option>
+            <option>Option 2</option>
+            <option>Option 3</option>
+          </select>
+          <submit>Send</submit>
+          <input type="text"></input>
+          <submit>Test Email</submit>
+        </form>
+      </div>
+      <div id="editor"></div>
     </div>
   );
 }
